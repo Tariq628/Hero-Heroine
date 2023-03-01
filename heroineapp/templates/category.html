@@ -1,0 +1,43 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	
+	{% include 'components/cdn.html' %}
+	
+	<!-- custom style -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+	
+	<title>Category</title>
+</head>
+
+<body class="d-flex flex-column">
+	
+	{% include 'components/header.html' %}
+
+	<main>
+		<div class="container">
+			<!-- Third row -->
+			<div class="">
+				<h2 class="font-weight-bold">Here & Now</h2>
+				<section class="categories">
+					{% for category in categories %}
+					<article class="category">
+						<img src="/{{ category.image }}" alt="" class="category__img">
+						<h3 class="category__title">{{  category.name }}</h3>
+						<p class="category__price">{{  category.description }}</p>
+					</article>
+					{% endfor %}
+				</section>
+			</div>
+		</div>
+	</main>
+
+	<!-- Bottom row -->
+	{% include 'components/footer.html' %}
+
+</body>
+
+</html>

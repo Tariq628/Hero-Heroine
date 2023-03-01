@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% include 'components/cdn.html' %}
+
+    <!-- custom style -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Document</title>
+    <style>
+        body {
+            height: auto;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column">
+
+    {% include 'components/header.html' %}
+
+    {% comment %} <header> {% endcomment %}
+        {% comment %} </header> {% endcomment %}
+        
+        <main>
+        <div class="container">
+            <img src="{% static 'img/home_page_icons/logo.png' %}" alt="" class="home-logo">
+            <div class="d-flex justify-content-between align-items-center">
+                <p class="d-flex align-items-center m-0">
+                    <img src="{% static 'img/home_icons/see-it-in-action.png' %}" width="20" alt="" class="mr-2">
+                    <small class="text-muted">See it in Action!</small>
+                </p>
+                <p class="d-flex flex-column align-items-center m-0">
+                    <img src="{% static 'img/home_icons/service-icon.png' %}" alt="" class="icon">
+                    <small>24/7 service</small>
+                </p>
+            </div>
+        </div>
+        <div class="showcase">
+            <div class="container">
+                <h1 class="font-weight-bold text-capitalize mb-2">The largest 🔥 virtual fashion company
+                    <button class="btn badge-pill btn-danger | py-1 px-3">
+                        World-Class <br> Experience
+                    </button>
+                </h1>
+                <p class="w-85">
+                    Our growth. signature look and innovation has earned us a place in so many people's
+                    hearts.
+                </p>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="container">
+                <div class="d-flex align-items-center">
+                    <img src="{% static 'img/home_icons/our-journey.png' %}" alt="" class="icon | mr-2">
+                    Our Journey
+                </div>
+                <img src="{% static 'img/home_page_icons/peoples.png' %}" alt="" class="peoples-img | mx-auto">
+                <img src="{% static 'img/home_icons/tecnhnologies.png' %}" alt="" class="technologies-img">
+            </div>
+        </div>
+    </main>
+
+    {% include 'components/footer.html' %}
+
+</body>
+
+</html>

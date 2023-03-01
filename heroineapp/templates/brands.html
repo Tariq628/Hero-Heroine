@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	{% include 'components/cdn.html' %}
+
+	<!-- custom style -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+	<title>Brands</title>
+</head>
+
+<body class="d-flex flex-column">
+	
+	{% include 'components/header.html' %}
+
+	<main>
+		<div class="container">
+			<!-- Third row -->
+			<div class="">
+				<h3 class="font-weight-bold">Brands</h3>
+				<section class="brands">
+					{% for brand in brands %}
+					<article class="brand">
+						<a href="{% url 'categories' brand.id %}"><img src="/{{  brand.image }}" alt="" class="brand__img"></a>
+						<img src="/{{  brand.logo }}" alt="" class="brand__logo">
+						<p class="brand__discount">{{  brand.discount }}</p>
+					</article>
+					{% endfor %}
+				</section>
+			</div>
+		</div>
+	</main>
+
+	<!-- Bottom row -->
+	{% include 'components/footer.html' %}
+
+</body>
+
+</html>

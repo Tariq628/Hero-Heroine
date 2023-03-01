@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+  
+  
+  {% include 'components/cdn.html' %}
+
+  <!-- custom style -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body class="d-flex flex-column">
+
+  {% include 'components/header.html' %}
+
+  <main>
+    <div class="container">
+      <!-- Third row -->
+      <div class="my-margin row mt-3 d-flex flex-column align-items-center justify-content-center">
+        <div class="col-10">
+          <h3 class="text-center font-weight-bold">
+            Please fill in the true information
+          </h3>
+          <form method="post" action="/sub-user" name="myForm" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3 m-auto">
+              <label>Select Gender</label>
+              <section class="my-section">
+                <div class="input-group">
+                  <input type="radio" name="gender" id="babyBoy" value="babyBoy" class="genderRadioInput" />
+                  <label for="babyBoy">
+                    <figure>
+                      <img src="{% static 'img/gender_icons/Baby Boy.png' %}" alt="" />
+                      <figcaption>Baby boy</figcaption>
+                    </figure>
+                  </label>
+                </div>
+                <div class="input-group">
+                  <input type="radio" name="gender" id="babyGirl" value="babyGirl" class="genderRadioInput" />
+                  <label for="babyGirl">
+                    <figure>
+                      <img src="{% static 'img/gender_icons/Baby Girl.png' %}" alt="" />
+                      <figcaption>Baby girl</figcaption>
+                    </figure>
+                  </label>
+                </div>
+                <div class="input-group">
+                  <input type="radio" name="gender" id="boy" value="boy" class="genderRadioInput" />
+                  <label for="boy">
+                    <figure>
+                      <img src="{% static 'img/gender_icons/boy.png' %}" alt="" />
+                      <figcaption>Boy</figcaption>
+                    </figure>
+                  </label>
+                </div>
+                <div class="input-group">
+                  <input type="radio" name="gender" id="girl" value="girl" class="genderRadioInput" />
+                  <label for="girl">
+                    <figure>
+                      <img src="{% static 'img/gender_icons/Girl.png' %}" alt="" />
+                      <figcaption>Girl</figcaption>
+                    </figure>
+                  </label>
+                </div>
+                <div class="input-group">
+                  <input type="radio" name="gender" id="man" value="man" class="genderRadioInput" />
+                  <label for="man">
+                    <figure>
+                      <img src="{% static 'img/gender_icons/Man.png' %}" alt="" />
+                      <figcaption>Man</figcaption>
+                    </figure>
+                  </label>
+                </div>
+                <div class="input-group">
+                  <input type="radio" name="gender" id="woman" value="woman" class="genderRadioInput" />
+                  <label for="woman">
+                    <figure>
+                      <img src="{% static 'img/gender_icons/Woman.png' %}" alt="" />
+                      <figcaption>Woman</figcaption>
+                    </figure>
+                  </label>
+                </div>
+              </section>
+            </div>
+
+
+            <div class="mb-3">
+              <label for="full_name" class="form-label">Full Name</label>
+              <input type="text" id="name" name="full_name" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="phone" class="form-label">phone</label>
+              <input type="text" id="phone" name="phone" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="age" class="form-label">Age</label>
+              <input type="number" id="age" name="age" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+              <div class="d-flex flex-column align-items-center justify-content-center">
+                <label for="image" class="uploadImageLabel" data-label="Please upload an image">
+                  <img src="{% static 'img/Photo.png' %}" alt="" class="uploadImageIcon" />
+                </label>
+                <input type="file" id="image" name="image" class="form-control" required />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 d-flex my-4 mx-auto justify-content-center badge-pill">
+              Next
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  {% include 'components/footer.html' %}
+
+  <script>
+
+    const imageInput = document.getElementById('image');
+    const imageElement = document.querySelector('.uploadImageIcon');
+
+    const uploadImageLabel = document.querySelector('.uploadImageLabel');
+
+    imageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+
+      reader.addEventListener('load', (e) => {
+        imageElement.src = e.target.result;
+        uploadImageLabel.dataset.label = file.name;
+      });
+
+      reader.readAsDataURL(file);
+    });
+
+  </script>
+</body>
+
+</html>

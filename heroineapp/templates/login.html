@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+  
+  
+  {% include 'components/cdn.html' %}
+
+  <!-- custom style -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body class="d-flex flex-column">
+
+  {% include 'components/header.html' %}
+
+  <main>
+    <div class="container">
+      <!-- Third row -->
+      <div class="my-margin row mt-3 d-flex flex-column align-items-center justify-content-center">
+        <div class="col-10">
+          <h3 class="text-center font-weight-bold">
+            Login
+          </h3>
+          <form method="post" action="/login/" name="myForm">
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" id="username" name="username" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" id="password" name="password" class="form-control" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 d-flex my-4 mx-auto justify-content-center badge-pill">
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  {% include 'components/footer.html' %}
+
+  <script>
+
+    const imageInput = document.getElementById('image');
+    const imageElement = document.querySelector('.uploadImageIcon');
+
+    const uploadImageLabel = document.querySelector('.uploadImageLabel');
+
+    imageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+
+      reader.addEventListener('load', (e) => {
+        imageElement.src = e.target.result;
+        uploadImageLabel.dataset.label = file.name;
+      });
+
+      reader.readAsDataURL(file);
+    });
+
+  </script>
+</body>
+
+</html>

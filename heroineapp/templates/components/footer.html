@@ -1,0 +1,20 @@
+{% load static %}
+<!-- Bottom row -->
+<footer class="row text-center d-flex align-items-baseline bg-light py-3 mt-auto">
+    <div class="col-3 d-flex flex-column align-items-center">
+        <a href="/register/"><img src="{% static 'img/profile_icons/profile.png' %}" width="30" alt="" /></a>
+        <label for="">Profile</label>
+    </div>
+    <div class="col-3 d-flex flex-column align-items-center">
+        <a href="/login/"><img src="{% static 'img/profile_icons/profile.png' %}" width="30" alt="" /></a>
+        <label for="">Login</label>
+    </div>
+    <div class="col-3 d-flex flex-column align-items-center my-home-btn">
+        <a href="/"><img src="{% static 'img/home_icons/Home.png' %}" width="30" alt="" srcset="" /></a>
+        <label for="">Home</label>
+    </div>
+    <div class="col-3 d-flex flex-column align-items-center">
+        <a href=""><img src="{% static 'img/home_icons/ping.png' %}" width="30" alt="" srcset="" /></a>
+        <label for="">Ping</label>
+    </div>
+</footer>

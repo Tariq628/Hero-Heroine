@@ -1,0 +1,26 @@
+{% load static %}
+
+<header>
+    <div class="container">
+      <div class="row mt-3 text-center d-flex align-items-center justify-content-around flex-nowrap">
+        <div class="d-flex flex-column align-items-center">
+          <a href=""><img src="{% static 'img/profile_icons/Add Photo.png' %}" width="30" alt="" srcset="" /></a>
+          <label for="">Add Photo</label>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+          <a href=""><img src="{% static 'img/profile_icons/Settings.png' %}" width="30" alt="" srcset="" />
+          </a>
+          <label for="">Settings</label>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+          <a href="{% url 'renewal' %}"><img src="{% static 'img/profile_icons/Renewals.png' %}" width="30" alt="" srcset="" />
+          </a>
+          <label for="">Renewals</label>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+          <a href="{% url 'logout' %}"><img src="{% static 'img/profile_icons/Delete Account.png' %}" width="30" alt="" srcset="" /></a>
+          <label for="">Delete Account</label>
+        </div>
+      </div>
+    </div>
+  </header>
