@@ -22,8 +22,6 @@
 
 <body class="f-flex flex-column">
 
-    {% include 'components/header.html' %}
-
     <main>
         <div class="container">
             <!-- Third row -->
@@ -73,14 +71,14 @@
                     <h3>Pre-Look</h3>
                     <div id="color_picker" class="row mt-3 mb-5 text-center flex-nowrap">
                         <div class="col-3 d-flex flex-column align-items-center">
-                            <a href=""><img src="{% static 'img/color_body_payment/Pick Colour.png' %}" width="50" alt=""
+                            <a href="#"><img src="{% static 'img/color_body_payment/Pick Colour.png' %}" width="50" alt=""
                                     srcset=""></a>
                         </div>
                         <div class="col-3 d-flex flex-column align-items-center">
-                            <a href=""><img src="{% static 'img/color_body_payment/Pre-Look.png' %}" width="50" alt="" srcset=""></a>
+                            <a href="{% url "user_profile" %}"><img src="{% static 'img/color_body_payment/Pre-Look.png' %}" width="50" alt="" srcset=""></a>
                         </div>
                         <div class="col-3 d-flex flex-column align-items-center">
-                            <a href=""><img src="{% static 'img/color_body_payment/Payment.png' %}" width="50" alt="" srcset=""></a>
+                            <a href="{% url "brands" %}"><img src="{% static 'img/color_body_payment/Payment.png' %}" width="50" alt="" srcset=""></a>
                         </div>
                     </div>
                 </div>

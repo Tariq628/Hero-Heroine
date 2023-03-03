@@ -12,30 +12,28 @@ def index(request):
     return render(request, 'index.html')
 
 
-def register(request):
-    if request.user.is_authenticated:
-        return redirect('/sub-user/')
+@login_required(login_url='/login/')
+def profile(request):
+    main_user = request.user
+    if main_user.is_selected:
+        user = request.user
+    else:
+        user = SubUser.objects.get(parent=user, is_selected=True)
     if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        print(password)
         full_name = request.POST.get('full_name')
         phone = request.POST.get('phone')
         gender = request.POST.get('gender')
         age = request.POST.get('age')
         image = request.FILES['image']
+        user.first_name = full_name
+        user.phone = phone
+        user.gender = gender
+        user.age = age
+        user.image = image
+        user.save()
+        return redirect('/user-profile-edit/')
 
-        custom_user = CustomUser()
-        custom_user.username = username
-        custom_user.set_password(password)
-        custom_user.first_name = full_name
-        custom_user.phone = phone
-        custom_user.gender = gender
-        custom_user.age = age
-        custom_user.image = image
-        custom_user.save()
-
-    return render(request, 'register.html')
+    return render(request, 'profile.html')
 
 
 @login_required(login_url='/login/')
@@ -67,7 +65,7 @@ def user_login(request):
         print(user)
         if user is not None:
             login(request, user)
-            return redirect("/")
+            return redirect("/profile/")
     return render(request, 'login.html')
 
 
@@ -127,6 +125,7 @@ def category(request, brand_id):
     return render(request, 'category.html', {'categories': categories})
 
 
+@login_required(login_url='/login/')
 def user_profile(request):
     main_user = request.user
     context = {}
@@ -150,8 +149,32 @@ def user_profile(request):
     return render(request, 'user-profile.html', context)
 
 
+@login_required(login_url='/login/')
 def user_profile_edit(request):
-    return render(request, 'user-profile-edit.html')
+    main_user = request.user
+    context = {}
+
+    if main_user.is_selected:
+        user = main_user
+    else:
+        user = SubUser.objects.get(is_selected=True, parent=main_user)
+    return render(request, 'user-profile-edit.html', {'image': user.image})
+
+
+def sign_up(request):
+    if request.user.is_authenticated:
+        return redirect('/sub-user/')
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        custom_user = CustomUser()
+        custom_user.username = username
+        custom_user.set_password(password)
+        custom_user.save()
+        return redirect('/login/')
+    return render(request, 'signup.html')
+
 
 def renewal(request):
     return render(request, 'account-renewal.html')

@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home</title>
+  <title>Signup</title>
   
   
   {% include 'components/cdn.html' %}
@@ -23,9 +23,9 @@
       <div class="my-margin row mt-3 d-flex flex-column align-items-center justify-content-center">
         <div class="col-10">
           <h3 class="text-center font-weight-bold">
-            Login
+            Signup
           </h3>
-          <form method="post" action="/login/" name="myForm">
+          <form method="post" action="/signup/" name="myForm">
             {% csrf_token %}
 
             <div class="mb-3">
