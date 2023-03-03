@@ -37,11 +37,15 @@
               <label for="password" class="form-label">Password</label>
               <input type="password" id="password" name="password" class="form-control" required />
             </div>
-
+            
             <button type="submit" class="btn btn-primary w-100 d-flex my-4 mx-auto justify-content-center badge-pill">
               Login
             </button>
           </form>
+          <div class="mb-3">
+            <a href="{% url 'sign_up' %}">Signup if not account</a>
+          </div>
+
         </div>
       </div>
     </div>

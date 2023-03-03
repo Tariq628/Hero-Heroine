@@ -162,8 +162,6 @@ def user_profile_edit(request):
 
 
 def sign_up(request):
-    if request.user.is_authenticated:
-        return redirect('/sub-user/')
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -178,3 +176,22 @@ def sign_up(request):
 
 def renewal(request):
     return render(request, 'account-renewal.html')
+
+
+
+def user_edit(request, id):
+    user = CustomUser.objects.get(id=id)
+    return render(request, 'user-profile-edit.html', {'image': user.image})
+
+def subuser_edit(request, id):
+    user = SubUser.objects.get(id=id)
+    return render(request, 'user-profile-edit.html', {'image': user.image})
+
+
+def user_delete(request, id):
+    user = CustomUser.objects.get(id=id).delete()
+    return redirect('/user-info/')
+
+def subuser_delete(request, id):
+    SubUser.objects.get(id=id).delete()
+    return redirect('/user-info/')

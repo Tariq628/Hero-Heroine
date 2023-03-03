@@ -6,8 +6,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home</title>
-  
-  
+
+
   {% include 'components/cdn.html' %}
 
   <!-- custom style -->
@@ -94,12 +94,16 @@
 
             <div class="mb-3">
               <label for="phone" class="form-label">phone</label>
-              <input type="number" id="phone" name="phone" class="form-control" maxlength="10" required />
+              <input name="phone" id="phone"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                type="number" class="form-control" required maxlength="11" />
             </div>
 
             <div class="mb-3">
               <label for="age" class="form-label">Age</label>
-              <input type="number" id="age" name="age" class="form-control" required />
+              <input name="age" id="age"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                type="number" class="form-control" required maxlength="2" />
             </div>
 
             <div class="mb-3">

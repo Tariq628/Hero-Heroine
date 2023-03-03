@@ -38,8 +38,8 @@
                         </div>
                         <div class="user-card__ctas">
                             <button type='submit' class="btn btn-dark mr-2">Select</button>
-                            <a href="" class="btn btn-dark mr-2">Edit</a>
-                            <a href="" class="btn btn-danger">Delete</a>
+                            <a href="{% url 'user_edit' user.id %}" class="btn btn-dark mr-2">Edit</a>
+                            <a href="{% url 'user_delete' user.id %}" class="btn btn-danger">Delete</a>
                         </div>
                     </div>
                 </form>
@@ -63,8 +63,8 @@
                         </div>
                         <div class="user-card__ctas">
                             <button type='submit' class="btn btn-dark mr-2">Select</button>
-                            <a href="" class="btn btn-dark mr-2">Edit</a>
-                            <a href="" class="btn btn-danger">Delete</a>
+                            <a href="{% url 'subuser_edit' sub_user.id %}" class="btn btn-dark mr-2">Edit</a>
+                            <a href="{% url 'subuser_delete' sub_user.id %}" class="btn btn-danger">Delete</a>
                         </div>
                     </div>
                 </form>
