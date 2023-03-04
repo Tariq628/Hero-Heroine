@@ -18,46 +18,37 @@
 
 <body class="d-flex flex-column">
 	<!-- Top row -->
-	<header>
-		<div class="container container-fluid">
-			<div class="row mx-3 mb-3 mt-3 text-center d-flex align-items-center justify-content-between flex-nowrap">
-				<div class="d-flex flex-column">
-					<a href=""><i class="fa-sharp fa-solid fa-bars text-dark fa-2x"></i></a>
-				</div>
-				<div class="d-flex flex-column">
-					<a href=""><i class="fa-solid fa-heart fa-2x" style="color: red"></i></a>
-				</div>
-			</div>
-		</div>
-	</header>
+	{% include 'components/header.html' %}
 
 	<!-- Third row -->
 	<main>
 		<div class="mb-5 container container-fluid">
 			<h3 class="font-weight-bold">Here & Now</h3>
-			<a href=""><i class="fa-sharp fa-solid fa-arrow-left ml-3 my-3" style="color: #222;"></i></a>
-			<div id="carouselExampleIndicators" class="carousel slide indicators | mb-5" data-ride="carousel">
+			<a href="#carouselExampleIndicators" role="button" data-slide="prev"><i class="fa-sharp fa-solid fa-arrow-left ml-3 my-3" style="color: #222;"></i></a>
+			<div id="carouselExampleIndicators" class="carousel slide indicators | mb-5">
 				<div class="carousel-inner my-slider">
+					{% for image in images %}
+					{% if forloop.counter == 1 %}
 					<div class="carousel-item active indicators">
-						<img class="d-block w-100" style="height: 90%;" src="./img/brand_icons/8.jpg" alt="First slide">
+						<img class="d-block w-100" style="height: 90%;" src="/{{ image.image }}" alt="First slide">
 					</div>
+					{% else %}
 					<div class="carousel-item indicators">
-						<img class="d-block w-100" src="./img/brand_icons/9.jpg" alt="Second slide">
+						<img class="d-block w-100" style="height: 90%;" src="/{{ image.image }}" alt="First slide">
 					</div>
-					<div class="carousel-item indicators">
-						<img class="d-block w-100" src="./img/brand_icons/10.jpg" alt="Third slide">
-					</div>
+					{% endif %}
+					{% endfor %}
 				</div>
+				
 				<ol class="carousel-indicators">
-					<li data-target="#carouselExampleIndicators" class="carousel-indicator bg-dark" data-slide-to="0"
-						class="active">
-					</li>
-					<li data-target="#carouselExampleIndicators" class="carousel-indicator bg-dark" data-slide-to="1">
-					</li>
-					<li data-target="#carouselExampleIndicators" class="carousel-indicator bg-dark" data-slide-to="2">
-					</li>
+					<li data-target="#carouselExampleIndicators" class="carousel-indicator bg-dark" data-slide-to="0" class="active"></li>
+					<li data-target="#carouselExampleIndicators" class="carousel-indicator bg-dark" data-slide-to="1"></li>
+					<li data-target="#carouselExampleIndicators" class="carousel-indicator bg-dark" data-slide-to="2"></li>
 				</ol>
 			</div>
+			
+		
+		
 			<div class="d-flex align-items-center">
 				<a href="#" class="btn btn-outline-dark btn-block mr-2">
 					<i class="fa-regular fa-heart mr-2" style="color: #222"></i>
@@ -65,8 +56,10 @@
 				</a>
 				<a href="#" class="btn btn-danger btn-block mt-0">Try On</a>
 			</div>
-
+			<a href="#carouselExampleIndicators" role="button" data-slide="next"><i class="fa-sharp fa-solid fa-arrow-right ml-3 my-3" style="color: #222;"></i></a>
+		
 		</div>
+		
 	</main>
 
 	{% include 'components/footer.html' %}

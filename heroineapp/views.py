@@ -131,7 +131,12 @@ def category(request, brand_id):
 
 def products(request, cat_id):
     products = Product.objects.filter(category_id=cat_id)
-    return render(request, 'products.html', {'products': products})
+    products_with_images = []
+    for product in products:
+        first_image = product.product_img.first()  # get the first image for the product
+        products_with_images.append({'product': product, 'image': first_image})
+    return render(request, 'products.html', {'products_with_images': products_with_images})
+
 
 
 @login_required(login_url='/login/')
@@ -223,3 +228,13 @@ def user_delete(request, id):
 def subuser_delete(request, id):
     SubUser.objects.get(id=id).delete()
     return redirect('/user-info/')
+
+
+def slider1(request, id):
+    context = {}
+    product = Product.objects.get(id=id)
+    images = product.product_img.all()
+    context['product'] = product
+    context['images'] = images
+    print(len(images))
+    return render(request, 'slider1.html', context)

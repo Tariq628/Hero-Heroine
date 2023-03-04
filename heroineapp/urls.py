@@ -23,4 +23,7 @@ urlpatterns = [
     path('subuser-edit/<int:id>/', views.subuser_edit, name='subuser_edit'),
     path('user-delete/<int:id>/', views.user_delete, name='user_delete'),
     path('subuser-delete/<int:id>/', views.subuser_delete, name='subuser_delete'),
+
+    path('slider1/<int:id>/', views.slider1, name='slider1'),
+
 ]

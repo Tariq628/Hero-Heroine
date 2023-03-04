@@ -19,11 +19,13 @@
 			<div class="">
 				<h3 class="font-weight-bold">Here & Now</h3>
 				<section class="products">
-					{% for product in products %}
+					{% for product_with_image in products_with_images %}
 					<article class="product">
-						<img src="/{{  product.image }}" alt="" class="product__img">
+						<a href="{% url 'slider1' product_with_image.product.id %}">
+							<img src="/{{ product_with_image.image.image }}" alt="" class="product__img">
+						</a>
 						<div class="d-flex align-items-center justify-content-between">
-							<p class="product__name | mb-0 mr-2">{{ product.name }}</p>
+							<p class="product__name | mb-0 mr-2">{{ product_with_image.product.name }}</p>
 							<i class="product__heart-icon"></i>
 						</div>
 					</article>

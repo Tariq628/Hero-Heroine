@@ -54,8 +54,11 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=50)
-    image = models.ImageField(upload_to="media/products/images", default="")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
+
+class ProductImg(models.Model):
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, null=True, related_name='product_img')
+    image = models.ImageField(upload_to="media/slider1/images", default="")
