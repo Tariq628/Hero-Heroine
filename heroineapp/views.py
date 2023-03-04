@@ -291,7 +291,7 @@ def slider1(request, id):
     images = product.product_img.all()
     context['product'] = product
     context['images'] = images
-    context['but_now'] = product.buy_now
+    context['buy_now'] = product.buy_now
     print(len(images))
     return render(request, 'slider1.html', context)
 
