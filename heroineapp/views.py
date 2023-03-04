@@ -30,7 +30,7 @@ def profile(request):
         user.age = age
         user.image = image
         user.save()
-        return render(request, 'user-profile-edit.html', )
+        return render(request, 'user-profile-edit.html', {'image': user.image, 'name': user.first_name})
 
     return render(request, 'profile.html')
 
