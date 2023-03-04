@@ -68,6 +68,7 @@ class Product(models.Model):
     color = models.CharField(max_length=50)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to="media/slider1/images", default="")
+    buy_now = models.CharField(max_length=255, default='')
 
     def __str__(self):
         return self.name
@@ -77,3 +78,6 @@ class ProductImg(models.Model):
     product = models.ForeignKey(
         'Product', on_delete=models.CASCADE, null=True, related_name='product_img')
     image = models.ImageField(upload_to="media/slider1/images", default="")
+
+    def __str__(self):
+        return self.product.name

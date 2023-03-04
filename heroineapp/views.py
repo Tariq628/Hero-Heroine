@@ -181,6 +181,7 @@ def category(request, brand_id):
         user = SubUser.objects.get(is_selected=True, parent=main_user)
         
     categories = Category.objects.filter(brand_id=brand_id, gender=user.gender)
+    print(categories)
     return render(request, 'category.html', {'categories': categories})
 
 
@@ -290,6 +291,7 @@ def slider1(request, id):
     images = product.product_img.all()
     context['product'] = product
     context['images'] = images
+    context['but_now'] = product.buy_now
     print(len(images))
     return render(request, 'slider1.html', context)
 

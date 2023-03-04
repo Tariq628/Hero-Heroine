@@ -35,18 +35,19 @@
                     <h3>Pick Colour</h3>
                     <div id="color_picker"
                         class="row mt-3 mb-5 text-center d-flex flex-row align-items-center justify-content-center">
-                        <div class="col-3 d-flex flex-column align-items-center">
+                        <div class="col-3 d-flex flex-column align-items-center" onclick="selectFirstDiv()">
                             <a href="#"><img src="{% static 'img/color_body_payment/Pick Colour.png' %}" width="60" alt=""
                                     srcset="" /></a>
                         </div>
-                        <div class="col-3 d-flex flex-column align-items-center">
+                        <div class="col-3 d-flex flex-column align-items-center" onclick="selectSecondDiv(event)">
                             <a href="{% url "user_profile" %}"><img src="{% static 'img/color_body_payment/Pre-Look.png' %}" width="60" alt=""
                                     srcset="" /></a>
                         </div>
-                        <div class="col-3 d-flex flex-column align-items-center">
+                        <div class="col-3 d-flex flex-column align-items-center" onclick="selectThirdDiv(event)">
                             <a href="{% url "brands" %}"><img src="{% static 'img/color_body_payment/Payment.png' %}" width="60" alt=""
                                     srcset="" /></a>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -56,7 +57,31 @@
 
     <!-- Bottom row -->
     {% include 'components/footer.html' %}
-
+    <script>
+        var firstDivSelected = false;
+        
+        function selectFirstDiv() {
+            firstDivSelected = true;
+        }
+        
+        function selectSecondDiv(event) {
+            if (!firstDivSelected) {
+                alert("Please select the first icon first.");
+                event.preventDefault();
+                return;
+            }
+            // code to handle the click event for the second div
+        }
+        
+        function selectThirdDiv(event) {
+            if (!firstDivSelected) {
+                alert("Please select the first icon first.");
+                event.preventDefault();
+                return;
+            }
+            // code to handle the click event for the third div
+        }
+    </script>
 </body>
 
 </html>
