@@ -16,7 +16,7 @@ def profile(request):
     if main_user.is_selected:
         user = request.user
     else:
-        user = SubUser.objects.get(parent=user, is_selected=True)
+        user = SubUser.objects.get(parent=main_user, is_selected=True)
     if request.method == "POST":
         full_name = request.POST.get('full_name')
         phone = request.POST.get('phone')
@@ -30,7 +30,7 @@ def profile(request):
         user.age = age
         user.image = image
         user.save()
-        return redirect('/user-profile-edit/')
+        return render(request, 'user-profile-edit.html', )
 
     return render(request, 'profile.html')
 
@@ -52,7 +52,7 @@ def sub_user(request):
         sub_user.age = age
         sub_user.image = image
         sub_user.save()
-        return redirect('/user-profile-edit/')
+        return render(request, 'user-profile-edit.html', {'image': sub_user.image, 'name': sub_user.name})
     return render(request, 'sub_profile.html')
 
 
@@ -168,9 +168,11 @@ def user_profile_edit(request):
 
     if main_user.is_selected:
         user = main_user
+        name = user.first_name
     else:
         user = SubUser.objects.get(is_selected=True, parent=main_user)
-    return render(request, 'user-profile-edit.html', {'image': user.image})
+        name = user.name
+    return render(request, 'user-profile-edit.html', {'image': user.image, 'name': name})
 
 
 def sign_up(request):
@@ -199,7 +201,14 @@ def user_edit(request, id):
 
 
 def subuser_edit(request, id):
+    main_user = request.user
+    main_user.is_selected = False
+    main_user.save()
+    main_user.subuser_set.all().update(is_selected=False)
+
     user = SubUser.objects.get(id=id)
+    user.is_selected = True
+    user.save()
     context = {}
     context['name'] = user.name
     context['image'] = user.image
