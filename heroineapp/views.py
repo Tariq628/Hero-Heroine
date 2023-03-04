@@ -6,12 +6,41 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+
+def which_user(request):
+    main_user = request.user
+    if main_user.is_selected:
+        user = main_user
+    else:
+        user = SubUser.objects.get(is_selected=True, parent=main_user)
+    if user.age == 0 or user.gender == '':
+        is_profile = False
+    else:
+        is_profile = True
+    return is_profile
+
+def check_height(request):
+    main_user = request.user
+    if main_user.is_selected:
+        user = main_user
+    else:
+        user = SubUser.objects.get(is_selected=True, parent=main_user)
+    if user.height == '' or user.body_size == '':
+        is_profile = False
+    else:
+        is_profile = True
+    return is_profile
+
+
 def index(request):
     return render(request, 'index.html')
 
 
 @login_required(login_url='/login/')
 def profile(request):
+
+    is_profile = which_user(request)
+
     main_user = request.user
     if main_user.is_selected:
         user = request.user
@@ -30,7 +59,7 @@ def profile(request):
         user.age = age
         user.image = image
         user.save()
-        return render(request, 'user-profile-edit.html', {'image': user.image, 'name': user.first_name})
+        return render(request, 'user-profile-edit.html', {'image': user.image, 'name': user.first_name, 'is_profile': is_profile})
 
     return render(request, 'profile.html')
 
@@ -44,12 +73,18 @@ def sub_user(request):
         age = request.POST.get('age')
         image = request.FILES['image']
 
+        main_user = request.user
+        main_user.is_selected = False
+        main_user.save()
+        main_user.subuser_set.all().update(is_selected=False)
+
         sub_user = SubUser()
         sub_user.parent = request.user
         sub_user.name = name
         sub_user.phone = phone
         sub_user.gender = gender
         sub_user.age = age
+        sub_user.is_selected = True
         sub_user.image = image
         sub_user.save()
         return render(request, 'user-profile-edit.html', {'image': sub_user.image, 'name': sub_user.name})
@@ -77,6 +112,10 @@ def user_logout(request):
 
 @login_required(login_url='/login/')
 def user_info(request):
+    is_profile = which_user(request)
+    print(is_profile)
+    if not is_profile:
+        return redirect('/profile/')
     context = {}
     user = CustomUser.objects.get(username=request.user.username)
     print("user_ifo")
@@ -115,16 +154,34 @@ def select_profile(request):
 
 @login_required(login_url='/login/')
 def brands(request):
+    is_profile = check_height(request)
+    if not is_profile:
+        return redirect('/user-profile/')
+
     main_user = request.user
     if main_user.is_selected:
         user = main_user
     else:
         user = SubUser.objects.get(is_selected=True, parent=main_user)
+    if user.height == '' and user.body_size == '':
+        is_profile = False
+    else:
+        is_profile = True
+
     brands = Brand.objects.all()
-    return render(request, 'brands.html', {'brands': brands})
+    return render(request, 'brands.html', {'brands': brands, 'is_profile': is_profile})
 
 
 def category(request, brand_id):
+    main_user = request.user
+    if main_user.is_selected:
+        user = main_user
+    else:
+        user = SubUser.objects.get(is_selected=True, parent=main_user)
+    if user.height == '' and user.body_size == '':
+        is_profile = False
+    else:
+        is_profile = True
     categories = Category.objects.filter(brand_id=brand_id)
     return render(request, 'category.html', {'categories': categories})
 
@@ -136,7 +193,6 @@ def products(request, cat_id):
         first_image = product.product_img.first()  # get the first image for the product
         products_with_images.append({'product': product, 'image': first_image})
     return render(request, 'products.html', {'products_with_images': products_with_images})
-
 
 
 @login_required(login_url='/login/')

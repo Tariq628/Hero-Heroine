@@ -58,8 +58,8 @@
                             {% comment %} <p class="user-card__text mb-1">Height: 6'7"</p> {% endcomment %}
                             <p class="user-card__text mb-1">Gender: {{ sub_user.gender }}</p>
                             <p class="user-card__text mb-1">Age: {{ sub_user.age }}</p>
-                            <p class="user-card__text mb-1">Body Size: {{ sub_user.body_size }}</p>
-                            <p class="user-card__text mb-1">Height: {{ sub_user.height }}</p>
+                            <p class="user-card__text mb-1">Body Size: {% if sub_user.body_size != '' %}{{sub_user.body_size}}{% else %}Please Fill{% endif %} </p>
+                            <p class="user-card__text mb-1">Height: {% if sub_user.height != '' %}{{sub_user.height}}{% else %}Please Fill{% endif %} </p>
                         </div>
                         <div class="user-card__ctas">
                             <button type='submit' class="btn btn-dark mr-2">Select</button>
