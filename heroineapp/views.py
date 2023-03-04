@@ -1,6 +1,6 @@
 
 from django.contrib.auth import authenticate, login, logout
-from .models import Brand, Category, CustomUser, SubUser
+from .models import Brand, Category, CustomUser, Product, SubUser
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
@@ -25,6 +25,7 @@ def profile(request):
         gender = request.POST.get('gender')
         age = request.POST.get('age')
         image = request.FILES['image']
+        print(image)
         user.first_name = full_name
         user.phone = phone
         user.gender = gender
@@ -121,8 +122,12 @@ def brands(request):
 
 def category(request, brand_id):
     categories = Category.objects.filter(brand_id=brand_id)
-    print(categories)
     return render(request, 'category.html', {'categories': categories})
+
+
+def products(request, cat_id):
+    products = Product.objects.filter(category_id=cat_id)
+    return render(request, 'products.html', {'products': products})
 
 
 @login_required(login_url='/login/')
@@ -178,10 +183,10 @@ def renewal(request):
     return render(request, 'account-renewal.html')
 
 
-
 def user_edit(request, id):
     user = CustomUser.objects.get(id=id)
     return render(request, 'user-profile-edit.html', {'image': user.image})
+
 
 def subuser_edit(request, id):
     user = SubUser.objects.get(id=id)
@@ -191,6 +196,7 @@ def subuser_edit(request, id):
 def user_delete(request, id):
     user = CustomUser.objects.get(id=id).delete()
     return redirect('/user-info/')
+
 
 def subuser_delete(request, id):
     SubUser.objects.get(id=id).delete()

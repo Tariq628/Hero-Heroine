@@ -30,7 +30,6 @@ class SubUser(models.Model):
 
     def __str__(self):
         return self.name
-    
 
 
 class Brand(models.Model):
@@ -42,11 +41,21 @@ class Brand(models.Model):
     def __str__(self):
         return self.brand_name
 
+
 class Category(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
     image = models.ImageField(upload_to="media/images", default="")
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=50)
+    image = models.ImageField(upload_to="media/products/images", default="")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name

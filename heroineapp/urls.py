@@ -14,6 +14,8 @@ urlpatterns = [
     path('select-profile/', views.select_profile),
     path('brands/', views.brands, name='brands'),
     path('categories/<int:brand_id>/', views.category, name='categories'),
+    path('products/<int:cat_id>/', views.products, name='products'),
+    
     path('user-profile/', views.user_profile, name='user_profile'),
     path('user-profile-edit/', views.user_profile_edit),
 

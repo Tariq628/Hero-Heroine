@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- custom style -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+	<title>Brands Gallery 2s</title>
+	{% include 'components/cdn.html' %}
+</head>
+
+<body class="d-flex flex-column">
+	
+	{% include 'components/header.html' %}
+
+	<main>
+		<div class="container">
+			<!-- Third row -->
+			<div class="">
+				<h3 class="font-weight-bold">Here & Now</h3>
+				<section class="products">
+					{% for product in products %}
+					<article class="product">
+						<img src="/{{  product.image }}" alt="" class="product__img">
+						<div class="d-flex align-items-center justify-content-between">
+							<p class="product__name | mb-0 mr-2">{{ product.name }}</p>
+							<i class="product__heart-icon"></i>
+						</div>
+					</article>
+						{% endfor %}
+				</section>
+			</div>
+		</div>
+	</main>
+
+	{% include 'components/footer.html' %}
+
+</body>
+
+</html>

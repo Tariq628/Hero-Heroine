@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser, SubUser, Brand, Category
+from .models import CustomUser, SubUser, Brand, Category, Product
 
 # from django.contrib.admin.models import LogEntry
 # LogEntry.objects.all().delete()
@@ -22,3 +22,7 @@ class CustomUserAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CustomUserAdmin(admin.ModelAdmin):
     list_display = ["name", "brand"]
+
+@admin.register(Product)
+class CustomUserAdmin(admin.ModelAdmin):
+    list_display = ["name", "category"]
