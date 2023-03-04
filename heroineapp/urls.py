@@ -25,5 +25,6 @@ urlpatterns = [
     path('subuser-delete/<int:id>/', views.subuser_delete, name='subuser_delete'),
 
     path('slider1/<int:id>/', views.slider1, name='slider1'),
+    path('product-list/<cat_id>/', views.product_list, name='product_list'),
 
 ]

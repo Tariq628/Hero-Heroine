@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	{% include 'components/cdn.html' %}
+	
+	<!-- custom style -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+	<title>Brands Gallery 2s</title>
+</head>
+
+<body class="d-flex flex-column">
+	
+	
+	{% include 'components/header.html' %}
+	
+	<main>
+		<div class="container">
+			<!-- Third row -->
+			<div class="">
+				<h3 class="font-weight-bold">Here & Now</h3>
+				<section class="products">
+					{% for product in products %}
+					<article class="product">
+						<a href="{% url 'slider1' product.id %}">
+							<img src="/{{  product.image }}" alt="" class="product__img">
+						</a>
+						<div class="d-flex align-items-center justify-content-between">
+							{% comment %} <p class="product__name | mb-0 mr-2">Urbano Fashion</p>
+							<i class="product__heart-icon"></i> {% endcomment %}
+						</div>
+					</article>
+					{% endfor %}
+				</section>
+			</div>
+		</div>
+	</main>
+	
+	<!-- Bottom row -->
+	{% include 'components/footer.html' %}
+	
+	
+</body>
+
+</html>

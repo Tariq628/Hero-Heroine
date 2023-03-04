@@ -19,6 +19,7 @@ def which_user(request):
         is_profile = True
     return is_profile
 
+
 def check_height(request):
     main_user = request.user
     if main_user.is_selected:
@@ -178,11 +179,8 @@ def category(request, brand_id):
         user = main_user
     else:
         user = SubUser.objects.get(is_selected=True, parent=main_user)
-    if user.height == '' and user.body_size == '':
-        is_profile = False
-    else:
-        is_profile = True
-    categories = Category.objects.filter(brand_id=brand_id)
+        
+    categories = Category.objects.filter(brand_id=brand_id, gender=user.gender)
     return render(request, 'category.html', {'categories': categories})
 
 
@@ -294,3 +292,11 @@ def slider1(request, id):
     context['images'] = images
     print(len(images))
     return render(request, 'slider1.html', context)
+
+
+def product_list(request, cat_id):
+    context = {}
+    category = Category.objects.get(id=cat_id)
+    products = category.product_set.all()
+    context['products'] = products
+    return render(request, 'product_list.html', context)

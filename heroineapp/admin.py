@@ -17,11 +17,11 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 @admin.register(Brand)
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ["brand_name", "discount"]
+    list_display = ["brand_name"]
 
 @admin.register(Category)
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ["name", "brand"]
+    list_display = ["brand"]
 
 @admin.register(Product)
 class CustomUserAdmin(admin.ModelAdmin):

@@ -24,8 +24,6 @@
 					{% for brand in brands %}
 					<article class="brand">
 						<a href="{% url 'categories' brand.id %}"><img src="/{{  brand.image }}" alt="" class="brand__img"></a>
-						<img src="/{{  brand.logo }}" alt="" class="brand__logo">
-						<p class="brand__discount">{{  brand.discount }}</p>
 					</article>
 					{% endfor %}
 				</section>

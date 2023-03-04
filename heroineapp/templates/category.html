@@ -25,9 +25,7 @@
 				<section class="categories">
 					{% for category in categories %}
 					<article class="category">
-						<a href="{% url 'products' category.id %}"><img src="/{{ category.image }}" alt="" class="category__img"></a>
-						<h3 class="category__title">{{  category.name }}</h3>
-						<p class="category__price">{{  category.description }}</p>
+						<a href="{% url 'product_list' category.id %}"><img src="/{{ category.image }}" alt="" class="category__img"></a>
 					</article>
 					{% endfor %}
 				</section>
