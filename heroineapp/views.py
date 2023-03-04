@@ -54,6 +54,7 @@ def sub_user(request):
         sub_user.age = age
         sub_user.image = image
         sub_user.save()
+        return redirect('/user-profile-edit/')
     return render(request, 'sub_profile.html')
 
 
