@@ -8,7 +8,7 @@ from .models import CustomUser, SubUser, Brand, Category, Product
 # Register your models here.
 @admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ["username", "first_name", "gender", "age"]
+    list_display = ["id", "username", "first_name", "gender", "age"]
 
 
 @admin.register(SubUser)

@@ -6,8 +6,6 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-
-@login_required(login_url='/login/')
 def index(request):
     return render(request, 'index.html')
 
@@ -81,6 +79,8 @@ def user_logout(request):
 def user_info(request):
     context = {}
     user = CustomUser.objects.get(username=request.user.username)
+    print("user_ifo")
+    print(user.id)
     sub_users = user.subuser_set.all()
     context['user'] = user
     context['sub_users'] = sub_users
@@ -97,8 +97,11 @@ def select_profile(request):
         main_user.subuser_set.all().update(is_selected=False)
 
         user_subuser = request.POST.get('user_subuser')
-        print(user_subuser)
-        id = int(request.POST.get('id')[0])
+        if isinstance(request.POST.get('id'), list):
+            id = int(request.POST.get('id')[0])
+        else:
+            id = int(request.POST.get('id'))
+
         if user_subuser == "user":
             user = CustomUser.objects.get(id=id)
         else:
@@ -186,12 +189,18 @@ def renewal(request):
 
 def user_edit(request, id):
     user = CustomUser.objects.get(id=id)
-    return render(request, 'user-profile-edit.html', {'image': user.image})
+    context = {}
+    context['name'] = user.first_name
+    context['image'] = user.image
+    return render(request, 'user-profile-edit.html', context)
 
 
 def subuser_edit(request, id):
     user = SubUser.objects.get(id=id)
-    return render(request, 'user-profile-edit.html', {'image': user.image})
+    context = {}
+    context['name'] = user.name
+    context['image'] = user.image
+    return render(request, 'user-profile-edit.html', context)
 
 
 def user_delete(request, id):
