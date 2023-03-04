@@ -141,8 +141,10 @@ def user_profile(request):
 
     if main_user.is_selected:
         user = main_user
+        name = user.first_name
     else:
         user = SubUser.objects.get(is_selected=True, parent=main_user)
+        name = user.name
     print(user)
 
     if request.method == "POST":
@@ -152,6 +154,7 @@ def user_profile(request):
         user.body_size = body_size
         user.save()
 
+    context['name'] = name
     context['gender'] = user.gender
     context['height'] = user.height.replace(".", "'")
     context['body_size'] = user.body_size.capitalize()
