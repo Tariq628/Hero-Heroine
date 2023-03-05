@@ -81,4 +81,4 @@ class ProductImg(models.Model):
     image = models.ImageField(upload_to="media/slider1/images", default="")
 
     def __str__(self):
-        return self.product.name
+        return self.product.name + " " + self.product.category.name
