@@ -17,7 +17,7 @@ urlpatterns = [
     path('products/<int:cat_id>/', views.products, name='products'),
     
     path('user-profile/', views.user_profile, name='user_profile'),
-    path('user-profile-edit/', views.user_profile_edit),
+    path('user-profile-edit/', views.user_profile_edit, name='user_profile_edit'),
 
     path('user-edit/<int:id>/', views.user_edit, name='user_edit'),
     path('subuser-edit/<int:id>/', views.subuser_edit, name='subuser_edit'),

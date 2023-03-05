@@ -210,6 +210,8 @@ def user_profile(request):
     if request.method == "POST":
         height = request.POST.get('height')
         body_size = request.POST.get('body_size')
+        print(height)
+        print(body_size)
         user.height = height
         user.body_size = body_size
         user.save()
@@ -232,7 +234,7 @@ def user_profile_edit(request):
     else:
         user = SubUser.objects.get(is_selected=True, parent=main_user)
         name = user.name
-    return render(request, 'user-profile-edit.html', {'image': user.image, 'name': name})
+    return render(request, 'user-profile-edit.html', {'image': user.image, 'name': name, 'flag': True})
 
 
 def sign_up(request):
@@ -257,6 +259,7 @@ def user_edit(request, id):
     context = {}
     context['name'] = user.first_name
     context['image'] = user.image
+    context['flag'] = False
     return render(request, 'user-profile-edit.html', context)
 
 
@@ -272,6 +275,7 @@ def subuser_edit(request, id):
     context = {}
     context['name'] = user.name
     context['image'] = user.image
+    context['flag'] = False
     return render(request, 'user-profile-edit.html', context)
 
 

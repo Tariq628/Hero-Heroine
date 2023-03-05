@@ -58,7 +58,15 @@
     <!-- Bottom row -->
     {% include 'components/footer.html' %}
     <script>
-        var firstDivSelected = false;
+        var flag = '{{  flag }}';
+        if (flag == 'True')
+            flag = true
+        else
+            flag = false
+        console.log(flag)
+        if (flag){
+            var firstDivSelected = false;
+        var secondDivSelected = false;
         
         function selectFirstDiv() {
             firstDivSelected = true;
@@ -70,18 +78,20 @@
                 event.preventDefault();
                 return;
             }
-            // code to handle the click event for the second div
+            secondDivSelected = true;
         }
         
         function selectThirdDiv(event) {
-            if (!firstDivSelected) {
-                alert("Please select the first icon first.");
+            if (!secondDivSelected) {
+                alert("Please select the second icon first.");
                 event.preventDefault();
                 return;
             }
             // code to handle the click event for the third div
         }
+        }
     </script>
+    
 </body>
 
 </html>
