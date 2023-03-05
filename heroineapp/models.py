@@ -50,6 +50,7 @@ COLOR_CHOICES = (
 
 
 class Category(models.Model):
+    name = models.CharField(max_length=50)
     image = models.ImageField(upload_to="media/images", default="")
     gender = models.CharField(
         max_length=20, choices=COLOR_CHOICES, default='man')
